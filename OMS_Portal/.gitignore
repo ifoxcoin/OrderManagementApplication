@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+.env.*
+api/**/bin/
+api/**/obj/
+api/**/appsettings.Local.json

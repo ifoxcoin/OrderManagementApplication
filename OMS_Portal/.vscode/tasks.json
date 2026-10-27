@@ -1,0 +1,858 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start OMS API",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://0.0.0.0:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build and Start OMS API",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://0.0.0.0:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS Web",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"dev",
+				"--",
+				"--host",
+				"0.0.0.0",
+				"--port",
+				"5173"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS Web",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS API Fresh",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5081"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart OMS API Process",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"taskkill",
+				"/F",
+				"/IM",
+				"OrderManagement.Api.exe"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start Updated OMS API",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS Web Final",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart OMS Web",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"dev",
+				"--",
+				"--host",
+				"0.0.0.0",
+				"--port",
+				"5173"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS Web Verified",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS After Shortcode Update",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Stop OMS API For Update",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"taskkill",
+				"/F",
+				"/IM",
+				"OrderManagement.Api.exe"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS API With Shortcode",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart API Null Safe",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"taskkill",
+				"/F",
+				"/IM",
+				"OrderManagement.Api.exe"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start API Null Safe",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS Web Final",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"dev",
+				"--",
+				"--host",
+				"localhost",
+				"--port",
+				"5173"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS Branded UI",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS Lookup Fix",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Stop Existing OMS API",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"taskkill",
+				"/F",
+				"/IM",
+				"OrderManagement.Api.exe"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS API Clean",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS Web Clean",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"dev",
+				"--",
+				"--host",
+				"localhost",
+				"--port",
+				"5173"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS With Cereal Background",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS Web With Background",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"dev",
+				"--",
+				"--host",
+				"localhost",
+				"--port",
+				"5173"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Accurate Lookup Dropdowns",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Final Dropdown Fix",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Order Queue Layout",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Order Queue Layout Final",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS Order Page",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"dev",
+				"--",
+				"--host",
+				"localhost",
+				"--port",
+				"5173"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart OMS API CORS",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"taskkill",
+				"/F",
+				"/IM",
+				"OrderManagement.Api.exe"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS API CORS",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Final Order Front Page",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Multi Item Order Flow",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Navigation And Caution Flow",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Final Order Details",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Professional OMS UI",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart OMS API Schema Probe",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"taskkill",
+				"/F",
+				"/IM",
+				"OrderManagement.Api.exe"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS API Schema Probe",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS Order Persistence",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS API Persistence",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"build",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Stop API Before Final Build",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"taskkill",
+				"/F",
+				"/IM",
+				"OrderManagement.Api.exe"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build API Final",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"build",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start API With Order Save",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restore OMS API NuGet",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"restore",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS Web Preview",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"dev",
+				"--",
+				"--host",
+				"localhost",
+				"--port",
+				"5173"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Success Animation Fix",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build OMS Frontend DB Fix",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"npm.cmd",
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Stop OMS API DB Fix",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"taskkill",
+				"/F",
+				"/IM",
+				"OrderManagement.Api.exe"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start OMS API DB Verified",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Stop API For Salesorder Query",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"taskkill",
+				"/F",
+				"/IM",
+				"OrderManagement.Api.exe"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build API Salesorder Query",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"build",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start API Salesorder Query",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"dotnet",
+				"run",
+				"--project",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"--urls",
+				"http://localhost:5080"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Publish OMS API IIS",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"publish",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"-c",
+				"Release",
+				"-o",
+				".\\publish\\OMS-Api"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$msCompile"
+			]
+		},
+		{
+			"label": "Publish OMS API Staging",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"publish",
+				".\\api\\OrderManagement.Api\\OrderManagement.Api.csproj",
+				"-c",
+				"Release",
+				"-o",
+				".\\publish\\OMS-Api-Staging"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$msCompile"
+			]
+		},
+		{
+			"label": "Publish OMS Web IIS",
+			"dependsOn": "Build OMS Web",
+			"dependsOrder": "sequence",
+			"type": "shell",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"try { New-Item -ItemType Directory -Force -Path .\\publish\\OMS-Web | Out-Null; Copy-Item -Path .\\dist\\* -Destination .\\publish\\OMS-Web -Recurse -Force -ErrorAction Stop } catch { Write-Error $_; exit 1 }"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Remove Example Env",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/d",
+				"/c",
+				"if exist .env.example (del /f /q .env.example) & if exist .env.example (echo still-exists) else (echo removed)"
+			],
+			"isBackground": false
+		}
+	]
+}
