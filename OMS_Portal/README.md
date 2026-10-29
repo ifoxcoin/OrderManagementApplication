@@ -1,68 +1,78 @@
 # Harbor OMS
 
-Responsive order management portal for the existing EasyInv SQL Server database.
+Responsive order management portal for the EasyInv SQL Server database.
 
 ## Project layout
 
 - `src/` - React + TypeScript tablet/mobile web application.
 - `api/OrderManagement.Api/` - ASP.NET Core API. SQL Server is accessed here only.
-- `DBScript.sql` - supplied legacy database script should remain outside the web root.
+- `DBScript.sql` - supplied legacy database script; keep it outside the web root.
 
-## Run the web application
+## Local development
+
+Start the API from `api/OrderManagement.Api`:
 
 ```powershell
-npm install
+dotnet run --launch-profile OrderManagement.Api
+```
+
+In another terminal, start the portal:
+
+```powershell
+npm ci
 npm run dev
 ```
 
-The UI opens at `http://localhost:5173`. The API base URL is read at startup from `public/runtime-config.json`:
+Open `http://localhost:5173/OMS-Orderpro/`. The Vite development server proxies API calls to `http://localhost:5080`.
 
-```json
-{
-	"apiBaseUrl": "http://192.168.0.21:91"
-}
-```
+The local API connection string is configured in `api/OrderManagement.Api/appsettings.json`. For developer-specific settings, use the ignored `appsettings.Local.json` or environment variables; do not commit database passwords.
 
-For a deployed app, edit `runtime-config.json` beside `index.html` in the published web folder. The app requests this file without caching, so changing `apiBaseUrl` does not require rebuilding the frontend. Set only the API origin, without a route such as `/api/customers`. The API must allow the published website's origin through CORS.
+## Build a LAN pilot package
 
-## Run the API
+The published API can serve the built portal from the same IIS site. This keeps API calls same-origin for Windows PCs, tablets, and phones on the client LAN.
 
-The API needs the .NET 8 SDK and the SQL Server client package restore:
+Run this from PowerShell on a build machine with Node.js/npm and the .NET 8 SDK:
 
 ```powershell
-dotnet restore .\api\OrderManagement.Api\OrderManagement.Api.csproj
-dotnet run --project .\api\OrderManagement.Api\OrderManagement.Api.csproj
+npm ci
+.\scripts\Publish-LanPilot.ps1 -SqlServer 'localhost\SQLEXPRESS'
 ```
 
-The API listens on `http://localhost:5080` and exposes Swagger at `/swagger`.
-
-For a real installation, replace the development connection string with a server-side secret or environment variable:
+Run `npm ci` before packaging when dependencies are not already installed; the publish script leaves the active `node_modules` directory untouched. Use the actual SQL Server instance name installed at the client site. The script builds the frontend and API, configures integrated SQL authentication, and creates a zip under `artifacts\`. It does not package a SQL password. Optional parameters:
 
 ```powershell
-$env:ConnectionStrings__EasyInv = "Server=SQLSERVER;Database=EasyInv;User Id=oms_api;Password=...;TrustServerCertificate=True;"
+.\scripts\Publish-LanPilot.ps1 `
+  -SqlServer 'localhost\SQLEXPRESS' `
+  -Database 'EasyInv_JST' `
+  -CompanyId 1 `
+  -UserId 1
 ```
 
-Never put a SQL connection string in React code or expose SQL Server directly to tablets.
+Confirm the company and user IDs with the client before deploying. Transfer and extract the generated zip on the Windows host that runs IIS and SQL Server.
+
+### IIS host setup
+
+1. Install IIS and the **.NET 8 Hosting Bundle** on the host. Restart IIS after installing the Hosting Bundle.
+2. Extract the package to a stable folder, for example `C:\OMS\OrderPro`.
+3. In IIS Manager, create an application pool named `OMS-OrderPro`, set **.NET CLR Version** to **No Managed Code**, and use that pool for a website pointing to the extracted folder.
+4. Bind the site to a LAN-only address and port. Keep Anonymous Authentication enabled only for this explicitly selected, no-login pilot.
+5. Grant the application-pool identity access to the EasyInv database. The connection uses Windows Integrated Authentication; do not replace it with a broadly privileged SQL account.
+6. Restrict Windows Firewall so only trusted client devices on the LAN can reach the site. Do not expose it to the public internet or forward the site through a router.
+7. Open the site URL from a client device. The root serves the portal and `/api/health` checks the API.
+
+The published API runs under IIS in Production mode. Swagger is disabled and cross-origin API access is not enabled; the portal and API are intended to share the same origin.
+
+## Important security limitation
+
+This package is a **LAN-only pilot**, not a production-secure deployment: the application currently has no user authentication or authorization, and anyone who can reach the site can access its API, read customer/catalog data, and submit or edit orders. Network/firewall restrictions reduce exposure but do not replace sign-in. Do not use this deployment for sensitive or publicly reachable workloads until an authentication model, HTTPS, and role-based authorization are implemented and tested.
 
 ## Current API surface
 
 - `GET /api/health` - service check.
 - `GET /api/orders` - reads orders from `salesorder` and customer names from `ledgermaster`.
-- `POST /api/orders` - saves a confirmed order atomically to `salesorder` and `salesorderdetails`.
+- `GET /api/orders/{referenceNumber}` - reads order details.
+- `POST /api/orders` and `PUT /api/orders/{referenceNumber}` - saves orders and edits.
 - `GET /api/catalog/items` - reads the catalog from `item`.
 - `GET /api/customers` - searches customers by `led_shortcode` or name.
 
-Confirmed order persistence uses the live `EasyInv_JST` schema:
-
-- Header: `dbo.salesorder` (`so_refno`, `so_date`, `led_id`, `so_totqty`, `so_isclose`, `users_uid`, `so_udate`, `so_status`).
-- Lines: `dbo.salesorderdetails` (`so_id`, `item_id`, `od_qty`, `od_soldqty`, `od_pendingqty`, `od_rate`, `od_unitvalue`, `com_id`, `od_istaxable`).
-- `OrderDefaults:UserId` in `appsettings.json` is currently `1`; set it to the correct user context before production. Line `com_id` is copied from the selected item's `dbo.item.com_id`.
-- Confirm does not reduce stock. It saves pending/sales-order rows only, matching the approval workflow.
-
-## Client decisions needed before production wiring
-
-1. What is the exact login flow: existing `users` credentials, Windows/Active Directory, or a new account system?
-2. Which `com_id` / company context should the web users operate under?
-3. Does a new web order represent a sale immediately, or a pending order that is approved later?
-4. Should the portal support barcode scanning, printing, offline use, or multiple warehouses?
-5. Please provide the stored procedure definitions or a non-sensitive execution example for `usp_salesmasterInsert`, `usp_salesdetailsInsert`, and `usp_stockInsert`.
+Order persistence uses the existing EasyInv schema. Confirm `OrderDefaults:UserId` and `OrderDefaults:CompanyId` for the client before installing. Confirm the SQL permissions required by the API with the database administrator.

@@ -16,7 +16,7 @@ if ('serviceWorker' in navigator) {
 }
 
 async function startApp() {
-  let apiBaseUrl = import.meta.env.DEV ? 'http://localhost:5080' : 'http://192.168.0.21:91'
+  let apiBaseUrl = import.meta.env.DEV ? '/OMS/OMS-Api' : ''
 
   if (!import.meta.env.DEV) {
     try {

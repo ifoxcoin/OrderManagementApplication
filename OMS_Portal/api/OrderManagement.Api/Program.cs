@@ -21,9 +21,14 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
         .AllowAnyMethod()));
 
 var app = builder.Build();
-app.UseCors();
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.MapGet("/api/health", () => Results.Ok(new { status = "ok", service = "order-management-api" }));
 
@@ -333,6 +338,8 @@ app.MapGet("/api/customers", async (string? search, IConfiguration configuration
         customers.Add(new CustomerOption(reader.GetInt64(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)));
     return Results.Ok(customers);
 });
+
+app.MapFallbackToFile("index.html");
 
 app.Run();
 
