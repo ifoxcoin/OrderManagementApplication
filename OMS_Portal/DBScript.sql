@@ -7826,3 +7826,37 @@ USE [master]
 GO
 ALTER DATABASE [EasyInv] SET  READ_WRITE 
 GO
+
+/* below script  date 29-10-2026  run for theni client to enable iispool*/
+
+USE [master];
+GO
+
+IF SUSER_ID(N'IIS APPPOOL\OMS Portal') IS NULL
+    CREATE LOGIN [IIS APPPOOL\OMS Portal] FROM WINDOWS;
+GO
+
+USE [EasyInv_JST];
+GO
+
+IF USER_ID(N'IIS APPPOOL\OMS Portal') IS NULL
+    CREATE USER [IIS APPPOOL\OMS Portal]
+        FOR LOGIN [IIS APPPOOL\OMS Portal];
+GO
+
+GRANT SELECT ON OBJECT::dbo.ledgermaster
+    TO [IIS APPPOOL\OMS Portal];
+GRANT SELECT ON OBJECT::dbo.item
+    TO [IIS APPPOOL\OMS Portal];
+GRANT SELECT ON OBJECT::dbo.category
+    TO [IIS APPPOOL\OMS Portal];
+GRANT SELECT ON OBJECT::dbo.company
+    TO [IIS APPPOOL\OMS Portal];
+GRANT SELECT ON OBJECT::dbo.stock
+    TO [IIS APPPOOL\OMS Portal];
+
+GRANT SELECT, INSERT, UPDATE ON OBJECT::dbo.salesorder
+    TO [IIS APPPOOL\OMS Portal];
+GRANT SELECT, INSERT, DELETE ON OBJECT::dbo.salesorderdetails
+    TO [IIS APPPOOL\OMS Portal];
+GO
